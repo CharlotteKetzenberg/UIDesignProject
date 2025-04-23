@@ -1,0 +1,96 @@
+[
+    {
+      "id": 1,
+      "title": "Exposure",
+      "description": "<p>Exposure correlates to a picture's overall brightness.</p><p>Increasing exposure increases brightness, and vice-versa.</p><p>Too much (over exposure) or too little (under exposure) causes the picture's details to get lost! Overexposure 'whites' out the details, and underexposure 'blacks' out the details.</p><p>Generally, exposure should be the first thing you adjust.</p>",
+      "slider_key": "exposure",
+      "default_value": 50,
+      "tips": [
+        "Start by getting the exposure right before adjusting other settings",
+        "If you can't see details in shadows, try increasing exposure",
+        "If bright areas look 'blown out', try decreasing exposure"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Contrast",
+      "description": "<p>Contrast controls the difference between the darkest and lightest parts of a picture.</p><p>Increasing contrast makes shadows darker and highlights brighter. Decreasing it softens the difference, making the image look more muted or flat.</p><p>Too much contrast can create harsh, unrealistic lighting. Too little can make your photo look dull or washed out.</p>",
+      "slider_key": "contrast",
+      "default_value": 50,
+      "tips": [
+        "Use contrast to add depth to flat-looking images",
+        "Low contrast can create a dreamy, ethereal mood",
+        "High contrast works well for dramatic black and white images"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Highlights",
+      "description": "<p>Highlights affect the brightest parts of the photo—like the sky, reflections, or shiny surfaces.</p><p>Lowering highlights brings back lost detail in those bright areas. Raising them can make your photo look more vivid or glowy.</p><p>Too-high highlights can cause areas to look 'blown out' or too white. Use this tool to recover brightness without changing the entire image!</p>",
+      "slider_key": "highlights",
+      "default_value": 50,
+      "tips": [
+        "Reduce highlights to see more detail in clouds or bright sky",
+        "Lowering highlights can help balance an unevenly lit photo",
+        "In portrait photos, slightly raised highlights can add a natural glow"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Shadows",
+      "description": "<p>Shadows target the darkest areas of the photo—like under a table or inside hair or clothing.</p><p>Raising shadows brings out hidden details. Lowering them adds depth and drama by making dark areas even darker.</p><p>This is great for balancing contrast or creating a specific mood. Careful—lifting shadows too much can make a photo look flat!</p>",
+      "slider_key": "shadows",
+      "default_value": 50,
+      "tips": [
+        "Raise shadows to see details in dark areas of your photo",
+        "Lowering shadows can create a more dramatic, moody effect",
+        "For portraits, slightly raising shadows can help show facial features"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Warmth",
+      "description": "<p>Warmth controls the color temperature of a photo—how cool (blue) or warm (yellow/orange) it feels.</p><p>Increasing warmth adds golden tones (great for sunsets or cozy vibes). Decreasing it adds cool blues (nice for snow or clean aesthetics).</p><p>Use warmth to correct strange lighting or to set the emotional tone of your image.</p>",
+      "slider_key": "warmth",
+      "default_value": 50,
+      "tips": [
+        "Warm tones often work well for portraits and sunset photos",
+        "Cool tones can enhance water scenes or create a crisp, clean look",
+        "Adjust warmth to fix photos taken under fluorescent lighting (often too cool)"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Tint",
+      "description": "<p>Tint fine-tunes the color balance between green and magenta.</p><p>It's especially helpful for fixing color casts caused by weird lighting—like fluorescent bulbs or mixed indoor light.</p><p>Use tint along with warmth to get accurate or creative colors, especially for skin tones and white surfaces.</p>",
+      "slider_key": "tint",
+      "default_value": 50,
+      "tips": [
+        "Adjust tint to fix unnatural skin tones in portraits",
+        "Indoor photos sometimes need tint adjustment due to mixed lighting",
+        "Small tint adjustments go a long way—use subtle changes"
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Saturation",
+      "description": "<p>Saturation adjusts the intensity of all the colors in a photo.</p><p>Increasing it makes colors look more bold and vibrant. Decreasing it mutes them—or turns the image black and white if set to zero.</p><p>Be careful with saturation—it's easy to go overboard and make things look unnatural. It's best used after exposure and contrast are dialed in.</p>",
+      "slider_key": "saturation",
+      "default_value": 50,
+      "tips": [
+        "Subtle saturation increases can make photos more appealing",
+        "Too much saturation often looks unnatural or 'over-processed'",
+        "Slightly reducing saturation can create an elegant, refined look"
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Putting It All Together",
+      "description": "<p>Start with Exposure: Adjust the exposure to get the overall brightness right. Don't worry about details yet—just aim for a balanced light level.</p><p>Balance Highlights and Shadows: Bring down highlights if bright areas are blown out (like clouds or bright clothing). Lift shadows if details are lost in darkness (like faces or backgrounds).</p><p>Fine-tune with Contrast: After adjusting brightness, add contrast to make the image pop. This helps separate elements and improves definition.</p><p>Adjust Color: Use warmth and tint to fix color balance and set the emotional tone. Boost saturation only if you need a more dramatic look (use sparingly).</p><p>Review and Tweak: Go back and forth—these tools interact! Increasing contrast might affect how shadows look, and changing vibrance might shift your perceived warmth.</p>",
+      "tips": [
+        "There's no single 'correct' edit—develop your own style",
+        "Make small adjustments and compare to the original frequently",
+        "The best edits enhance the photo without looking obviously edited"
+      ]
+    }
+  ]

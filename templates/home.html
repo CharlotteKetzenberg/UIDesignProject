@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <h2 class="display-5 mb-4">Welcome to ColorCorrect</h2>
+        <p class="lead mb-5">
+            Learn how to enhance your photos using professional color correction techniques.
+            Master exposure, contrast, highlights, shadows, warmth, tint, and saturation
+            through interactive lessons and quizzes.
+        </p>
+        
+        <div class="card bg-dark border-secondary mb-5">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{ url_for('static', filename='img/bridge.jpg') }}" alt="Original image" class="img-fluid mb-2">
+                        <p class="text-muted">Before</p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{{ url_for('static', filename='img/bridge_after.jpg') }}" alt="Edited image" class="img-fluid mb-2">
+                        <p class="text-muted">After</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="{{ url_for('learn', lesson_id=1) }}" class="btn btn-primary btn-lg px-5 py-3">
+            <span class="fs-4">Start Learning</span>
+        </a>
+    </div>
+</div>
+{% endblock %}
