@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}User Statistics{% endblock %}
+
+{% block additional_head %}
+<style>
+    .stats-card {
+        background-color: rgba(33, 37, 41, 0.8);
+        border: 1px solid #343a40;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .stats-section {
+        margin-bottom: 2rem;
+    }
+    
+    .table {
+        color: #f8f9fa;
+    }
+    
+    .table th {
+        border-color: #495057;
+    }
+    
+    .table td {
+        border-color: #343a40;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="mb-4">User Statistics <small class="text-muted">(Admin View)</small></h2>
+        
+        <div class="stats-card">
+            <div class="stats-section">
+                <h3>Learning Time</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Lesson</th>
+                            <th>Start Time</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, value in stats.items() %}
+                            {% if key.startswith('learn_') and key.endswith('_time') %}
+                                {% set lesson_id = key.split('_')[1] %}
+                                <tr>
+                                    <td>Lesson {{ lesson_id }}</td>
+                                    <td>{{ value }}</td>
+                                    <td>
+                                        {% if 'learn_' + lesson_id + '_duration' in stats %}
+                                            {{ "%.1f"|format(stats['learn_' + lesson_id + '_duration']) }} seconds
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="stats-section">
+                <h3>Quiz Performance</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Time Spent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, value in stats.items() %}
+                            {% if key.startswith('quiz_') and key.endswith('_time') %}
+                                {% set question_id = key.split('_')[1] %}
+                                <tr>
+                                    <td>Question {{ question_id }}</td>
+                                    <td>
+                                        {% if 'quiz_' + question_id + '_answer' in stats %}
+                                            {{ stats['quiz_' + question_id + '_answer'] }}
+                                        {% else %}
+                                            Not answered
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if 'quiz_' + question_id + '_duration' in stats %}
+                                            {{ "%.1f"|format(stats['quiz_' + question_id + '_duration']) }} seconds
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="stats-section">
+                <h3>Slider Adjustments</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Setting</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, value in stats.items() %}
+                            {% if key.startswith('slider_') or key.startswith('quiz-') %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

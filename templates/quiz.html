@@ -31,13 +31,29 @@
         border-radius: 0.25rem;
         margin-bottom: 0.5rem;
     }
+    .progress {
+        height: 10px;
+        background-color: #343a40;
+    }
+    .progress-bar {
+        background-color: #0d6efd;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-10">
-        <h2 class="mb-4">Question {{ question_id }}</h2>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Question {{ question_id }}</h2>
+            <div class="text-muted">{{ question_id }} of {{ total_questions }}</div>
+        </div>
+        
+        <!-- Progress bar -->
+        <div class="progress mb-4">
+            <div class="progress-bar" role="progressbar" style="width: {{ (question_id / total_questions) * 100 }}%" 
+                aria-valuenow="{{ question_id }}" aria-valuemin="0" aria-valuemax="{{ total_questions }}"></div>
+        </div>
         
         <div class="question-card">
             <h3>{{ question.question_text }}</h3>
@@ -112,6 +128,8 @@
         </div>
         
         <div class="d-flex justify-content-between mt-4">
+            <button id="back-button" class="btn btn-secondary" {% if question_id == 1 %}disabled{% endif %}>Previous Question</button>
+            
             {% if not is_last %}
                 <button id="next-question" class="btn btn-primary" disabled>Next Question</button>
             {% else %}
@@ -124,70 +142,4 @@
 
 {% block additional_scripts %}
 <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        let questionAnswered = false;
-        
-        // For multiple choice questions
-        $('.option-card').click(function() {
-            $('.option-card').removeClass('selected');
-            $(this).addClass('selected');
-            
-            // Enable the next button
-            $('#next-question, #finish-quiz').prop('disabled', false);
-            questionAnswered = true;
-            
-            // Store the answer
-            const answer = $(this).data('value');
-            $.ajax({
-                url: window.location.pathname,
-                method: 'POST',
-                data: {
-                    answer: answer,
-                    timestamp: new Date().toISOString()
-                }
-            });
-        });
-        
-        // For image editing questions
-        $('#check-edit').click(function() {
-            // Collect slider values
-            const sliderValues = {};
-            $('.slider').each(function() {
-                const id = $(this).attr('id');
-                sliderValues[id] = $(this).val();
-            });
-            
-            // Store the values
-            $.ajax({
-                url: window.location.pathname,
-                method: 'POST',
-                data: {
-                    ...sliderValues,
-                    timestamp: new Date().toISOString()
-                },
-                success: function() {
-                    // In a real app, you'd compare the values to the target
-                    // For now, just show feedback and enable next button
-                    $('#edit-feedback').html('<div class="alert alert-success">Your edit has been recorded!</div>');
-                    $('#next-question, #finish-quiz').prop('disabled', false);
-                    questionAnswered = true;
-                }
-            });
-        });
-        
-        // Navigation buttons
-        $('#next-question').click(function() {
-            if (questionAnswered) {
-                window.location.href = "{{ url_for('quiz', question_id=next_id) }}";
-            }
-        });
-        
-        $('#finish-quiz').click(function() {
-            if (questionAnswered) {
-                window.location.href = "{{ url_for('quiz_result') }}";
-            }
-        });
-    });
-</script>
 {% endblock %}

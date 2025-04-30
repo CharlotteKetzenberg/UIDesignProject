@@ -90,3 +90,106 @@ h1 {
 .display-1 {
     font-weight: bold;
 }
+
+/* Progress bar */
+.progress {
+    height: 10px;
+    border-radius: 5px;
+    background-color: #343a40;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background-color: #0d6efd;
+    transition: width 0.5s ease;
+}
+
+/* Image editing question improvements */
+.images-container {
+    margin-bottom: 1.5rem;
+}
+
+.images-container img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.slider-container {
+    margin-bottom: 0.8rem;
+}
+
+.form-label {
+    margin-bottom: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-label .value-display {
+    font-weight: normal;
+    color: #adb5bd;
+}
+
+/* Make edit question more responsive */
+@media (max-width: 767px) {
+    .question-card {
+        padding: 1rem;
+    }
+    
+    /* Stack images on small screens */
+    .images-container {
+        margin-bottom: 1rem;
+    }
+    
+    /* Make sliders more compact on mobile */
+    .slider-container {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Add styling for navigation buttons */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.nav-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Improve question results display */
+.question-result {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.question-result:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stats-box {
+    background-color: rgba(13, 110, 253, 0.1);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Back button styling */
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: #5c636a;
+    border-color: #565e64;
+}

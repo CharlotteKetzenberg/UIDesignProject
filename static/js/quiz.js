@@ -8,6 +8,21 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('edit-preview')) {
         initializeImageEdit();
     }
+    
+    // Handle back button
+    const backButton = document.getElementById('back-button');
+    if (backButton) {
+        backButton.addEventListener('click', function() {
+            // Get current question ID from URL
+            const currentPath = window.location.pathname;
+            const currentId = parseInt(currentPath.split('/').pop());
+            
+            if (currentId > 1) {
+                // Navigate to previous question
+                window.location.href = `/quiz/${currentId - 1}`;
+            }
+        });
+    }
 });
 
 // Initialize quiz functionality
@@ -40,10 +55,12 @@ function initializeQuiz() {
     if (nextButton) {
         nextButton.addEventListener('click', function() {
             if (!this.disabled) {
-                const nextUrl = this.getAttribute('data-next-url');
-                if (nextUrl) {
-                    window.location.href = nextUrl;
-                }
+                // Get current question ID from URL
+                const currentPath = window.location.pathname;
+                const currentId = parseInt(currentPath.split('/').pop());
+                
+                // Navigate to next question
+                window.location.href = `/quiz/${currentId + 1}`;
             }
         });
     }
@@ -54,6 +71,32 @@ function initializeQuiz() {
                 window.location.href = '/quiz/result';
             }
         });
+    }
+    
+    // Check if user has previously answered this question
+    checkPreviousAnswer();
+}
+
+// Check if the user has previously answered this question
+function checkPreviousAnswer() {
+    // Get current question ID from URL
+    const currentPath = window.location.pathname;
+    const currentId = parseInt(currentPath.split('/').pop());
+    
+    // Get answer from localStorage if exists
+    const savedAnswer = localStorage.getItem(`quiz_${currentId}_answer`);
+    
+    if (savedAnswer) {
+        // Select the previously chosen option
+        const optionCard = document.querySelector(`.option-card[data-value="${savedAnswer}"]`);
+        if (optionCard) {
+            optionCard.classList.add('selected');
+            
+            // Enable navigation buttons
+            document.querySelectorAll('#next-question, #finish-quiz').forEach(btn => {
+                btn.disabled = false;
+            });
+        }
     }
 }
 
@@ -102,8 +145,34 @@ function initializeImageEdit() {
         });
     }
     
+    // Load previously saved values if any
+    loadSavedSliderValues();
+    
     // Apply initial effects
     applyImageEffects(imagePreview);
+}
+
+// Load previously saved slider values
+function loadSavedSliderValues() {
+    // Get current question ID from URL
+    const currentPath = window.location.pathname;
+    const currentId = parseInt(currentPath.split('/').pop());
+    
+    const sliders = document.querySelectorAll('.slider');
+    
+    sliders.forEach(slider => {
+        const sliderId = slider.id;
+        const savedValue = localStorage.getItem(`quiz_${currentId}_${sliderId}`);
+        
+        if (savedValue) {
+            slider.value = savedValue;
+            
+            // Enable navigation if previous values exist
+            document.querySelectorAll('#next-question, #finish-quiz').forEach(btn => {
+                btn.disabled = false;
+            });
+        }
+    });
 }
 
 // Apply visual effects to the image based on slider values
@@ -157,6 +226,10 @@ function mapValue(value, fromLow, fromHigh, toLow, toHigh) {
 function saveAnswer(answer) {
     // Get current URL
     const url = window.location.pathname;
+    const questionId = parseInt(url.split('/').pop());
+    
+    // Store in localStorage for persistence
+    localStorage.setItem(`quiz_${questionId}_answer`, answer);
     
     // Send data to backend
     fetch(url, {
@@ -175,6 +248,12 @@ function saveAnswer(answer) {
 function saveImageEdit(values, callback) {
     // Get current URL
     const url = window.location.pathname;
+    const questionId = parseInt(url.split('/').pop());
+    
+    // Store in localStorage for persistence
+    for (const [key, value] of Object.entries(values)) {
+        localStorage.setItem(`quiz_${questionId}_${key}`, value);
+    }
     
     // Convert values to form data
     const formData = new FormData();
